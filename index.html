@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content page</title>
+    <link rel="stylesheet" href="./styles/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="page">
+        <header class="page-header">
+            <div class="fixed-content">
+                <div class="navigation">
+                    <img class="logo" src="./assets/img/logo.svg" alt="Logo">
+                    <input type="checkbox" id="btn-menu" class="menu-btn">
+                    <label for="btn-menu" class="menu-icon">
+                        Menu
+                    </label>
+                    <nav class="navigation-menu">
+                        <ul class="menu">
+                            <li class="menu-item">Menu Item 1</li>
+                            <li class="menu-item">Menu Item 2</li>
+                            <li class="menu-item">Menu Item 3</li>
+                            <li class="menu-item">Menu Item 4</li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="controls">
+                    <button class="control-item" type="button">LOG IN</button>
+                    /
+                    <button class="control-item" type="button">SIGN IN</button>
+                </div>
+            </div>
+        </header>
+        <main class="page-content">
+            <section class="search">
+                <form class="fixed-content search-form">
+                    <div class="search-fields">
+                        <div class="custom-input">
+                            <input type="number" name="length" id="length" min="1" required placeholder="Enter number">
+                            <label for="length">Length</label>
+                        </div>
+                        <div class="custom-input">
+                            <input type="number" name="limit" id="limit" min="1" required placeholder="Enter number">
+                            <label for="limit">Limit</label>
+                        </div>
+                    </div>
+                    <button class="search-btn" type="submit">Start</button>
+                </form>
+            </section>
+            <section class="articles">
+                <div class="fixed-content">
+                    <p class="loader">Progress: <span>13</span> of <span>100</span></p>
+                    <div class="articles-list">
+                        <article class="article">
+                            <div class="article-title">
+                                <h5>1. Lorem ipsum dolor sit amet</h5>
+                            </div>
+                            <p>Well, Prince, so Genoa and Lucca are now just family estates of the Buonapartes.</p>
+                        </article>
+                        <article class="article">
+                            <div class="article-title">
+                                <h5>2. Lorem ipsum dolor sit amet, unde omnis iste natus error sit voluptatem
+                                    accusantium
+                                    natus error sit voluptatem accusantium unde omnis iste natus
+                                </h5>
+                            </div>
+                            <p>But I warn you, if you don't tell me that this means war, if you still try to defend the
+                                infamies and horrors perpetrated by that Antichrist--I really believe he is
+                                Antichrist--I
+                                will have nothing more to do with you and you are no longer my friend, no longer my
+                                'faithful slave,' as you call yourself!</p>
+                        </article>
+                        <article class="article">
+                            <div class="article-title">
+                                <h5>3. Lorem ipsum dolor sit amet, unde omnis iste natus error unde omnis iste natus
+                                    error
+                                </h5>
+                            </div>
+                            <p>But how do you do?</p>
+                        </article>
+                        <article class="article">
+                            <div class="article-title">
+                                <h5>4. Lorem ipsum dolor sit amet, unde omnis iste natus error sit voluptatem
+                                    accusantium
+                                    sit voluptatem accusantium
+                                </h5>
+                            </div>
+                            <p>I see I have frightened you--sit down and tell me all the news.</p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer class="page-footer">
+            <div class="fixed-content">
+                <div class="footer-menu">
+                    <div class="menu">
+                        <p class="menu-title">Menu 1</p>
+                        <nav>
+                            <ul class="menu">
+                                <li class="menu-item">Menu Item 1</li>
+                                <li class="menu-item">Menu Item 2</li>
+                                <li class="menu-item">Menu Item 3</li>
+                                <li class="menu-item">Menu Item 4</li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="menu">
+                        <p class="menu-title">Menu 2</p>
+                        <nav>
+                            <ul class="menu">
+                                <li class="menu-item">Menu Item 1</li>
+                                <li class="menu-item">Menu Item 2</li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="menu">
+                        <p class="menu-title">Contacts</p>
+                        <ul class="menu">
+                            <li class="menu-item"><a class="link" href="tel:+12345">Phone</a></li>
+                            <li class="menu-item"><a class="link" href="mailto:example@mail.ru">Email</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="copyright">&copy; Lev Tolstoy</p>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>
