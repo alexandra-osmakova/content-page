@@ -38,7 +38,7 @@
         </header>
         <main class="page-content">
             <section class="search">
-                <form class="fixed-content search-form">
+                <form id="searchForm" class="fixed-content search-form">
                     <div class="search-fields">
                         <div class="custom-input">
                             <input type="number" name="length" id="length" min="1" required placeholder="Enter number">
@@ -49,16 +49,16 @@
                             <label for="limit">Limit</label>
                         </div>
                     </div>
-                    <button class="search-btn" type="submit">Start</button>
+                    <button class="search-btn" type="submit" id="submitBtn" >Start</button>
                 </form>
             </section>
             <section class="articles">
                 <div class="fixed-content">
-                    <p class="loader">Progress: <span>13</span> of <span>100</span></p>
+                    <p class="loader" id="loader" hidden>Progress: <span id="progressStart">0</span> of <span id="progressEnd"></span></p>
                     <div class="articles-list">
                         <article class="article">
                             <div class="article-title">
-                                <h5>1. Lorem ipsum dolor sit amet</h5>
+                                <h5>1. lorem ipsum dolor sit amet</h5>
                             </div>
                             <p>Well, Prince, so Genoa and Lucca are now just family estates of the Buonapartes.</p>
                         </article>
@@ -131,6 +131,7 @@
             </div>
         </footer>
     </div>
+    <script src="./js/script.js"></script>
 </body>
 
 </html>

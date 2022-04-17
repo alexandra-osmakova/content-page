@@ -241,7 +241,8 @@ h6 {
     font-family: inherit;
 }
 
-.search .search-form:invalid .search-btn {
+.search .search-form:invalid .search-btn, 
+.search .search-btn:disabled {
     pointer-events: none;
     background-color: var(--LIGHT_GRAY);
 }
@@ -275,6 +276,15 @@ h6 {
 .custom-input input:focus {
     outline: 0;
     border-bottom: 1px solid var(--DEFAULT_BLUE);
+}
+
+.custom-input input:disabled {
+    background-color: transparent;
+    opacity: 0.5;
+}
+
+.custom-input input:disabled+label {
+    opacity: 0.5;
 }
 
 .custom-input input:focus:invalid {
@@ -349,6 +359,7 @@ h6 {
 }
 
 .article-title h5 {
+    text-transform: capitalize;
     margin: 0;
     display: -webkit-box;
     -webkit-line-clamp: 2;
