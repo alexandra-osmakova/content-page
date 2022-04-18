@@ -9,12 +9,21 @@ const submitBtn = document.getElementById("submitBtn");
 const loader = document.getElementById("loader");
 const progressStart = document.getElementById("progressStart");
 const loaderEnd = document.getElementById("progressEnd");
+const content = document.getElementById("content");
+const btnMenu = document.getElementById("btn-menu");
+
+window.addEventListener("scroll", () => {
+    if (btnMenu.checked) {
+        btnMenu.checked = false;
+    }
+});
 
 document.getElementById("searchForm").onsubmit = async (e) => {
     e.preventDefault();
 
     const lengthValue = lengthInput.value;
     const limitValue = limitInput.value;
+
     const contentToInsert = getContentToInsert(lengthValue);
     const mapper = (content) =>
         new Promise((resolve) => {
@@ -23,6 +32,10 @@ document.getElementById("searchForm").onsubmit = async (e) => {
                 Math.round(Math.random() * 9000) + 1000
             );
         });
+
+    if (content.children.length !== 0) {
+        content.replaceChildren();
+    }
 
     updatePageState(true);
     updateLoaderState(lengthValue);
@@ -35,6 +48,7 @@ document.getElementById("searchForm").onsubmit = async (e) => {
 const queue = async (arr, callback, limit) => {
     let left = [...arr];
     const result = new Map();
+    const contentNodesList = new Map();
 
     const runRace = async () => {
         const payloadObjects = left.slice(0, limit);
@@ -43,16 +57,23 @@ const queue = async (arr, callback, limit) => {
                 return result.get(o);
             } else {
                 const objCallback = callback(o);
+
+                const article = generateContentItem(o);
+                contentNodesList.set(o, article);
+                content.append(article);
+
                 result.set(o, objCallback);
 
                 return objCallback;
             }
         });
+
         const ready = await Promise.any(payloadPromises);
 
-        updateProgress(ready);
+        updateProgress();
+        addArticleText(contentNodesList.get(ready), ready?.text);
 
-        left = left.filter((o, index) => o !== ready);
+        left = left.filter((o) => o !== ready);
 
         if (left.length > 0) {
             await runRace();
@@ -61,11 +82,59 @@ const queue = async (arr, callback, limit) => {
 
     await runRace();
 
-    return arr.map((o) => result.get(o));
+    return result.values();
 };
 
-const updateProgress = (contentReady) => {
-    console.log(contentReady);
+const generateContentItem = (contentToInsert) => {
+    const article = document.createElement("article");
+    article.classList.add("article");
+
+    article.append(getArticleTitle(contentToInsert.title), getPreloader());
+
+    return article;
+};
+
+const getArticleTitle = (titleText) => {
+    const articleTitle = document.createElement("div");
+    const title = document.createElement("h5");
+
+    articleTitle.classList.add("article-title");
+    title.innerText = titleText;
+
+    articleTitle.append(title);
+
+    return articleTitle;
+};
+
+const getPreloader = () => {
+    const preloader = document.createElement("div");
+
+    preloader.classList.add("preloader");
+
+    for (let index = 0; index < 3; index++) {
+        preloader.append(generatePreloaderItem());
+    }
+
+    return preloader;
+};
+
+const generatePreloaderItem = () => {
+    const preloaderItem = document.createElement("div");
+    preloaderItem.classList.add("preloader-item");
+
+    return preloaderItem;
+};
+
+const addArticleText = (contentNode, text) => {
+    const preloader = contentNode.lastChild;
+    contentNode.removeChild(preloader);
+
+    const articleText = document.createElement("p");
+    articleText.innerText = text;
+    contentNode.append(articleText);
+};
+
+const updateProgress = () => {
     progressStart.innerText = Number(progressStart.innerText) + 1;
 };
 
@@ -89,18 +158,23 @@ const getContentToInsert = (contentLength) => {
     const availableContent = getSentenceList();
     const currentContent = [];
 
+    let contentCounter = 0;
+
     for (let index = 0; index < contentLength; index++) {
+        contentCounter =
+            contentCounter > availableContent.length - 1 ? 0 : contentCounter;
         currentContent.push({
             title: `${index + 1}. ${getRandomTitle()}`,
-            text: availableContent[index].trim(),
+            text: availableContent[contentCounter].trim(),
         });
+        contentCounter = contentCounter + 1;
     }
 
     return currentContent;
 };
 
 const getSentenceList = () => {
-    return textToInsert.match(/[^\.!\?]+[\.!\?]+/g);
+    return textToInsert.replace(/\"/gi, "").match(/[^\.!\?]+[\.!\?]+/g);
 };
 
 const getRandomTitle = () => {
